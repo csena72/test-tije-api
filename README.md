@@ -56,6 +56,7 @@ GET /products?supplierId=2
 * [Doctrine](https://www.doctrine-project.org/) - Object Relational Mapper
 * [API Platform](https://api-platform.com/) - API Platform Framework.
 * [Mariadb](https://mariadb.org/) - The open source relational database
+* [Docker](https://www.docker.com/) - Docker is an operating system (or runtime) for containers.
  
  
 [Subir](#top)
@@ -63,6 +64,7 @@ GET /products?supplierId=2
 <a name="item4"></a>
 ### Instalación 🔧 
  
+- Nota: Se uso el siguiente Scaffold construido con Docker: https://github.com/csena72/symfony_docker
 
 
 _Clonar el proyecto y configurar la db en el archivo .env_  
