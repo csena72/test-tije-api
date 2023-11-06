@@ -3,39 +3,63 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
+
+use Symfony\Component\Serializer\Annotation\Groups;
+
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
-#[ApiResource]
+#[ApiResource(
+    operations: [        
+        new GetCollection(),
+    ],
+    normalizationContext: ['groups' => ['read']],
+    paginationItemsPerPage: 50,
+)]
+#[ApiFilter(SearchFilter::class, properties: [
+    'supplier_id'   => 'exact',    
+])]
 class Product
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['read'])]
     private ?int $id = null;
 
-    #[ORM\Column]
+    #[ORM\Column]     
     private ?int $supplier_id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read'])]    
     private ?string $name = null;
 
     #[ORM\Column(length: 1024, nullable: true)]
+    #[Groups(['read'])]
     private ?string $short_description = null;
 
     #[ORM\Column(length: 20)]
+    #[Groups(['read'])]
     private ?string $status = null;
 
     #[ORM\Column]
+    #[Groups(['read'])]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['read'])]        
     private ?\DateTimeImmutable $updatedAt = null;
 
     #[ORM\OneToMany(mappedBy: 'product', targetEntity: ProductMedia::class)]
+    #[Groups(['read'])]        
     private Collection $media;
 
     public function __construct()

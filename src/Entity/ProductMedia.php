@@ -3,9 +3,17 @@
 namespace App\Entity;
 
 use App\Repository\ProductMediaRepository;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Serializer\Annotation\Groups;
+
 #[ORM\Entity(repositoryClass: ProductMediaRepository::class)]
+#[ApiResource(
+    operations: [],
+    normalizationContext: ['groups' => ['read']],    
+)]
 class ProductMedia
 {
     #[ORM\Id]
@@ -14,6 +22,7 @@ class ProductMedia
     private ?int $id = null;
 
     #[ORM\Column(length: 512)]
+    #[Groups(['read'])]
     private ?string $url = null;
 
     #[ORM\Column]
