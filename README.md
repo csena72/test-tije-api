@@ -81,7 +81,7 @@ symfony console doctrine:fixtures:load
 
 ```
 
-La API se levanta en:
+La API corre en:
 
 ```
 ej.: http://localhost:8080/api
